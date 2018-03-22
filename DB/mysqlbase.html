@@ -27,7 +27,11 @@
 
   <div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#_1">数据库范式</a></li>
-<li><a href="#_2">数据库事务</a></li>
+<li><a href="#_2">数据库事务</a><ul>
+<li><a href="#4acid">事务的4个特性（ACID）</a></li>
+<li><a href="#_3">事务的隔离级别</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <h3 id="_1">数据库范式</h3>
@@ -44,13 +48,31 @@
 </ul>
 <p>当然在实际的开发中，虽然需尽量遵守第三范式，但有时为了提高运行效率，需要考虑冗余部分字段，降低范式标准。</p>
 <h3 id="_2">数据库事务</h3>
-<p>数据库事务(Database Transaction) ，指的是属于一个操作单元的一系列数据库操作的集合。</p>
+<p>数据库事务(Database Transaction) ，指的是属于一个操作单元的一系列数据库操作的集合(即执行多个数据库操作，待操作全部完成，提交事务，则完成事务，期间若任意操作出错，可回滚全部操作)。</p>
+<h4 id="4acid">事务的4个特性（ACID）</h4>
+<ol>
+<li>原子性（atomic）：事务是原子操作单元，对于其中的修改，要么全部执行，要么全部不执行。</li>
+<li>一致性（consistent）：事务在完成时，必须所有的数据都保持一致的状态。</li>
+<li>隔离性（insulation）：由并发事务所做的修改必须和其他并发事务的修改隔离。事务读取数据时的状态，要么处于其他事务修改前，要么处于其他事务修改后，事务并不读取中间状态的数据。<br />
+4 持久性（duration）：事务一旦完成，对系统的影响是永久性的。即使出现故障也会继续保持。</li>
+</ol>
+<h4 id="_3">事务的隔离级别</h4>
+<ul>
+<li>读未提交<br />
+  未做控制，允许脏读、不可重复读、幻读</li>
+<li>读已提交<br />
+  不允许脏读，允许不可重复读、幻读</li>
+<li>可重复读<br />
+  不允许脏读、不可重复读、幻读，保证事务一致性（此为InnoDB默认隔离级别）</li>
+<li>串行化读<br />
+  通过锁来控制并发，读与写之间相互阻塞，所有事务串行执行（并发不足）</li>
+</ul>
     </div>
     <div id="footer">
       <span>
         <p>Copyright © 2018 mrship.
         Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2018-03-22 20:04:00</p>
+        <p>Site Generated 2018-03-22 20:19:34</p>
       </span>
     </div>
 
